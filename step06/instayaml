@@ -8,8 +8,8 @@ use pod::babashka::instaparse: :as insta
 #   :pod 'org.babashka/instaparse/0.0.4'
 
 defn main(grammar-file output-file=nil):
-  grammar =: grammar-file:slurp
-  input =: slurp(IN):chomp
+  grammar =: grammar-file:read
+  input =: read(IN):chomp
 
   if output-file:
     instayaml-to-file output-file:
@@ -23,7 +23,7 @@ defn instayaml(expr input):
       insta/parser: expr
 
 defn instayaml-to-file(filename grammar input):
-  spit filename:
+  write filename:
     instayaml grammar: input
 
 defn vector-to-yaml-string(parsed-result):

@@ -50,7 +50,7 @@ defn instayaml(expr input):
 #     (.write writer (instayaml expr input))))
 
 defn instayaml-to-file(expr input filename):
-  spit filename:
+  write filename:
     instayaml: expr input
 
 # (print (instayaml

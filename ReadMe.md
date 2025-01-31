@@ -40,7 +40,7 @@ defn instayaml(grammar input): ...
 
 main(file):
   say:
-    instayaml grammar: file:slurp
+    instayaml grammar: file:read
 ```
 
 
