@@ -9,4 +9,3 @@ run:
 
 clean:
 	$(RM) output.yaml
-	$(RM) -r .cpcache

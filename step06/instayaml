@@ -1,0 +1,38 @@
+#!/usr/bin/env ys-0
+
+use-pod: q(org::babashka/instaparse) '0.0.4'
+use pod::babashka::instaparse: :as insta
+
+# TODO Fix ys some we can write 2 lines above as:
+# use pod::babashka::instaparse: :as insta
+#   :pod 'org.babashka/instaparse/0.0.4'
+
+defn main(grammar-file output-file=nil):
+  grammar =: grammar-file:slurp
+  input =: slurp(IN):chomp
+
+  if output-file:
+    instayaml-to-file output-file:
+      grammar input
+    say:
+      instayaml grammar: input
+
+defn instayaml(expr input):
+  vector-to-yaml-string:
+    insta/parse _ input:
+      insta/parser: expr
+
+defn instayaml-to-file(filename grammar input):
+  spit filename:
+    instayaml grammar: input
+
+defn vector-to-yaml-string(parsed-result):
+  yaml/dump: parsed-result:vector-to-map
+
+defn vector-to-map(data):
+  walk/postwalk _ data:
+    fn(x):
+      if x:vector? && x:first:keyword?:
+        M+: first(x)
+            x.#.eq(2).if(x.1 x:rest:V)
+        else: x

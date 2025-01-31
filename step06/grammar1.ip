@@ -1,0 +1,15 @@
+Lambda = Params <'=>'> Expression
+
+Params = <'('> VarList <')'>
+
+<VarList> = Var (<','> Var)*
+
+Expression = Term (Op Term)*
+
+Term   = Var | Number | '(' Expression ')'
+
+Op     = '*' | '/' | '+' | '-' | '>' | '<' | '==' | '&&' | '||'
+
+<Var>  = #'[a-zA-Z_][a-zA-Z0-9_]*'
+
+Number = #'[0-9]+'
