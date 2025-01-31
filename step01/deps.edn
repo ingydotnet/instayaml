@@ -1,0 +1,3 @@
+{:deps
+ {instaparse/instaparse {:mvn/version "1.5.0"}
+  clj-commons/clj-yaml {:mvn/version "1.0.29"}}}
